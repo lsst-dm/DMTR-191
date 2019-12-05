@@ -2,7 +2,7 @@
 \usepackage{booktabs}
 
 \title[V19.0.0 Characterization Report]{Characterization Metric Report: Science Pipelines Version 19.0.0}
-\author{G.~Comoretto on behalf of Science Pipelines Team}
+\author{J.~Carlin, K.~S.~Krughoff, \& G.~Comoretto}
 \date{\today}
 
 \setDocRef{DMTR-191}
@@ -26,15 +26,15 @@ The report for the previous version can be found in \citeds{DMTR-141}.
 
 Metrics were measured using \href{https://github.com/lsst/validation_data_hsc}{validation\_data\_hsc}, which consists of 8 HSC engineering images: 2 \emph{r}-band, 4 \emph{i}'-band, and 2 \emph{y}-band. Measurements were made on individual, separately-processed, single-frame images: jointcal was not run. For comparison, we provide the \SRD required ``design'' value of each metric as defined in the Science Requirements Document \citedsp{LPM-17}, and, where available, the target for this release as defined in the Data Management Development Milestone Roadmap \citedsp{LDM-240}. All values were computed using the \texttt{examples/runHscTest.sh} script in the \href{https://github.com/lsst/validate_drp}{validate\_drp} package. For context, the \SRD does not place any constraints on \emph{y}-band for these KPMs.  For the photometric metrics, there are only specifications for \emph{g}, \emph{r}, and \emph{i}'. In the case of the ellipticity correlation metrics, there are specs only for \emph{r} and \emph{i}'. The \emph{y}-band measurements are for interest and historical tracking.
 
-Some KPMs (AF1, AD1) involve thresholds that are different for ``design'', ``minimum'', and ``stretch'' specifications. Thus comparing one of these metrics against a given target number is a two-level process. Both the threshold used in the calculation is dependent on the specifications, and the requirement on the computed number is dependent on the specifications.
+Some KPMs (AF1, AD1) involve thresholds that are different for ``design'', ``minimum'', and ``stretch'' specifications. Thus comparing one of these metrics against a given target number is a two-level process. Both the threshold used in the calculation and the requirement on the computed number are dependent on the specifications.
 
 The metrics in this report have all been computed relative to the ``design'' thresholds. The values of these KPMs would be different if computed against different thresholds.
 
 Note also that the photometric performance of the pipelines in the \emph{y}-band is an under estimate of expected delivered performance.  For these tests, the \emph{y}-band data was calibrated with \emph{z}-band photometry.  This is due to the lack of a reference catalog containing \emph{y}-band information at this time. We recognize that the bandpass mismatch is certainly not the only source of scatter in the \emph{y}-band photometry. These metric measurements are still worth noting in this report as a historical benchmark to track relative performance.
 
-The \emph{i}-band measurement of TE1 changed somewhat since the previous characterization report.  The new value does not push the TE1 measurement above the ``design'' threshold for that KPM.
+Some of the Astrometric Performance measurements (Table~\ref{astrometric-performance}) have increased since the previous pipeline release. This behavior is expected because we adopted a more accurate definition for calculating the RMS for the ``AMx'' metrics. Because our tests use few images (i.e., low $n$), the small correction in how we calculate RMS (adopting $n/(n-1)*np.std()$ for the unbiased sample standard deviation) increases our estimates of ``AMx.'' However, this actually represents an \emph{improvement} in our measurement of the performance that reveals we were not doing as well as we thought.
 
-The per cycle target numbers come from the ``KPMs'' sheet of \href{http://ls.st/LDM-240}{LDM-240}.
+The per-cycle target numbers come from the ``KPMs'' sheet of \href{http://ls.st/LDM-240}{LDM-240}.
 
 \section{Photometric Performance}\label{photometric-performance}
 
